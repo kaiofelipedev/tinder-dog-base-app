@@ -1,5 +1,15 @@
 import { Home } from "@/src/screens/home/home";
+import { Stack } from "expo-router";
 
 export default function HomeScreen  (){
-    return <Home/>
+    return (
+        <>
+        <Stack.Screen
+            options={{
+                headerShown: false
+            }}
+        />
+        <Home/>
+        </>
+    )
 }
