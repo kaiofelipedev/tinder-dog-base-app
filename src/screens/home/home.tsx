@@ -1,55 +1,52 @@
-import { api } from "@/src/utils/server-config"
-import { AntDesign } from "@expo/vector-icons"
+import axios from "axios"
 import { useEffect, useState } from "react"
-import { TouchableOpacity, View } from "react-native"
+import { Image, Text, TouchableOpacity, View } from "react-native"
 import { styles } from "./styles"
-import { Image } from "expo-image"
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export const Home = () => {
-    const [valueApi, setValueApi] = useState([])
+    const [dogs, setDogs] = useState([])
     const [match, setMatch] = useState([])
 
-    const getApi = async () => {
-        return await api.get("/dogs/getAllDogs").then((resp) => {
-            setValueApi(resp.data)
+    const getApi =  async() => {
+      return await axios.get('http://localhost:3000/dogs/getAllDogs').then((resp) => {
+            setDogs(resp.data)
         })
     }
 
-    console.log('valueApi', valueApi)
+    const heandlePressNo = () => {
+        setDogs((prevState) => prevState.slice(1))
+    }
+
+    const handlePressYes = () => {
+        setMatch((prevState) => [...prevState, dogs[0]])
+        setDogs((prevState) => prevState.slice(1))
+    }
 
     useEffect(() => {
         getApi()
     }, [])
 
-    const handlePressNo = () => {
-        setValueApi((prevState) => prevState.slice(1))
-    }
-
-    const handlePressYes = () => {
-        setMatch((prevState) => [...prevState, valueApi[0]])
-        setValueApi((prevState) => prevState.slice(1))
-    }
-
     return (
         <View style={styles.container}>
-            <Image
-                source={{uri: valueApi[0]?.image[0]}}
-                style={styles.image}
-                contentFit="contain"
-            />  
+            <TouchableOpacity style={styles.contentImage}>
+                <Image
+                    source={{uri: dogs[0]?.image[0]}}
+                    style={styles.imageDog}
+                />
+            </TouchableOpacity>
             <View style={styles.contentButtons}>
                 <TouchableOpacity
-                onPress={handlePressNo}
-                style={styles.buttonNo}  
+                    onPress={heandlePressNo} 
+                    style={[styles.buttonYes, {backgroundColor: 'red'}]}
                 >
-                    <AntDesign name="close" size={24} color={'#fff'}/>
+                    <AntDesign name="close" size={32} color="#fff" />
                 </TouchableOpacity>
-
-                <TouchableOpacity
-                onPress={handlePressYes}
-                style={styles.buttonYes}  
+                <TouchableOpacity 
+                    onPress={handlePressYes}
+                    style={styles.buttonYes}
                 >
-                    <AntDesign name="heart" size={24} color={'#fff'}/>
+                    <AntDesign name="heart" size={32} color="#fff" />
                 </TouchableOpacity>
             </View>
         </View>

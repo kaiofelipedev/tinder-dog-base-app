@@ -1,37 +1,36 @@
 import { StyleSheet } from "react-native";
 
 
-
 export const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center', 
-        alignItems: 'center'
-    },
-    image: {
-        height: 500,
-        width: '80%',
-        borderRadius: 10,
-        marginTop: 24
-    },
-    contentButtons: {
-        flexDirection: 'row',
-        marginTop: 24,
-        justifyContent: "space-around",
-        width: '25%'
-    },
-    buttonNo: {
-        backgroundColor: 'red',
-        height: 80,
-        width: 80,
-        borderRadius: 80,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
+    contentImage: {
+        height: '60%',
+        width: '80%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFA500',
+        borderRadius: 20
+    },
+    imageDog: {
+        height: '90%',
+        width: '90%',
+    },
+    contentButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        width: '80%',
+        marginTop: 24
+    },
     buttonYes: {
+        height: 70,
+        width: 70,
+        borderRadius: 70,
         backgroundColor: 'green',
-        height: 80,
-        width: 80,
-        borderRadius: 80,
         justifyContent: 'center',
         alignItems: 'center'
     }
